@@ -15,6 +15,7 @@ import api from '../../services/api';
 
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -39,7 +40,10 @@ const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
+
   const navigation = useNavigation();
+
+  const { signIn } = useAuth();
 
   const handleSignUp = useCallback(async (data: SignUpFormData) => {
     try {
