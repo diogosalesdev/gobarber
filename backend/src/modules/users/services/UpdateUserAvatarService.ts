@@ -1,23 +1,28 @@
 import { getRepository } from "typeorm";
 import path from 'path';
 import fs from 'fs';
-
 import uploadConfig from '@config/upload';
-import User from "@modules/users/infra/typeorm/entities/User";
-import AppError from "@shared/errors/AppError";
 
-interface Request {
+import AppError from "@shared/errors/AppError";
+import IUsersRepository from '../repositories/IUsersRepository';
+
+import User from "@modules/users/infra/typeorm/entities/User";
+
+interface IRequest {
   user_id: string;
   avatarFilename: string;
 }
 
 class UpadateUserAvatarService {
-  public async execute({user_id, avatarFilename}: Request): Promise<User> {
-    const usersRepository = getRepository(User);
-    const user = await usersRepository.findOne(user_id);
+  constructor (private usersRepository: IUsersRepository) {}
+
+  public async execute({user_id, avatarFilename}: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(user_id);
+
     if (!user) {
       throw new AppError('Only authenticated users can change avatar!', 401);
     }
+
     if (user.avatar) {
       const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
       const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
@@ -25,8 +30,9 @@ class UpadateUserAvatarService {
         await fs.promises.unlink(userAvatarFilePath);
       }
     }
+
     user.avatar = avatarFilename;
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
     return user;
   }
 }
