@@ -1,8 +1,8 @@
 # Recuperação de Senha
 
   **RF (Requisitos Funcionais)**
-    - O usúario deve poder recuperar sua senha informando o seu e-mail;
-    - O usuário deve receber um e-mail com instruções de recuperação de senha;
+X    - O usúario deve poder recuperar sua senha informando o seu e-mail;
+X    - O usuário deve receber um e-mail com instruções de recuperação de senha;
     - O usuário deve poder resetar sua senha;
 
   **RNF (Requisitos Não Funcionais)**
