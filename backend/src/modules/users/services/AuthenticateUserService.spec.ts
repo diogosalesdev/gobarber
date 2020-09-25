@@ -4,14 +4,20 @@ import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import AuthenticateUserService from './AuthenticateUserService';
 import CreateUserservice from './CreateUserService';
 
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+let authtenticateUser: AuthenticateUserService;
+
 describe('AuthenticateUser', () => {
-  it('should be able to authenticate', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const authtenticateUser = new AuthenticateUserService(
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    authtenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider
     );
+  });
+  it('should be able to authenticate', async () => {
     const createUser = new CreateUserservice(
       fakeUsersRepository,
       fakeHashProvider
@@ -32,15 +38,7 @@ describe('AuthenticateUser', () => {
   });
 
   it('should not be able to authenticate with non existing user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const authtenticateUser = new AuthenticateUserService(
-      fakeUsersRepository,
-      fakeHashProvider
-    );
-
-    expect(
+    await expect(
       authtenticateUser.execute({
         email: 'diogosalesdev@gmail.com',
         password: '123456',
@@ -49,12 +47,6 @@ describe('AuthenticateUser', () => {
   });
 
   it('should not be able to authenticate with wrong password', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const authtenticateUser = new AuthenticateUserService(
-      fakeUsersRepository,
-      fakeHashProvider
-    );
     const createUser = new CreateUserservice(
       fakeUsersRepository,
       fakeHashProvider
@@ -66,7 +58,7 @@ describe('AuthenticateUser', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       authtenticateUser.execute({
         email: 'diogosalesdev@gmail.com',
         password: 'wrong-password',
