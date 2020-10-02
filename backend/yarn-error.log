@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/local/bin/yarn add @types/celebrate -D
+  /usr/bin/node /usr/local/bin/yarn add class-transformer @types/class-transformer
 
 PATH: 
   /home/diogo/.zinit/polaris/sbin:/home/diogo/.zinit/polaris/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/diogo/Android/Sdk/emulator:/home/diogo/Android/Sdk/tools:/home/diogo/Android/Sdk/tools/bin:/home/diogo/Android/Sdk/platform-tools:/home/diogo/android-studio/bin:/home/diogo/Android/Sdk/emulator:/home/diogo/Android/Sdk/tools:/home/diogo/Android/Sdk/tools/bin:/home/diogo/Android/Sdk/platform-tools:/home/diogo/android-studio/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fcelebrate: Not found
+  Error: https://registry.yarnpkg.com/@types%2fclass-transformer: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:198:13)
@@ -43,11 +43,13 @@ npm manifest:
     "dependencies": {
       "@types/bcryptjs": "^2.4.2",
       "@types/cors": "^2.8.7",
+      "@types/dotenv": "^8.2.0",
       "@types/nodemailer": "^6.4.0",
       "bcryptjs": "^2.4.3",
       "celebrate": "^13.0.3",
       "cors": "^2.8.5",
       "date-fns": "^2.15.0",
+      "dotenv": "^8.2.0",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
       "handlebars": "^4.7.6",
@@ -693,6 +695,13 @@ Lockfile:
     integrity sha512-sOdDRU3oRS7LBNTIqwDkPJyq0lpHYcbMTt0TrjzsXbk/e37hcLTH6eZX7CdbDeN0yJJvzw9hFBZkbtCSbk/jAQ==
     dependencies:
       "@types/express" "*"
+  
+  "@types/dotenv@^8.2.0":
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
+    integrity sha512-ylSC9GhfRH7m1EUXBXofhgx4lUWmFeQDINW5oLuS+gxWdfUeW4zJdeVTYVkexEW+e2VUvlZR2kGnGGipAWR7kw==
+    dependencies:
+      dotenv "*"
   
   "@types/eslint-visitor-keys@^1.0.0":
     version "1.0.0"
@@ -1967,6 +1976,11 @@ Lockfile:
     integrity sha512-yxJ2mFy/sibVQlu5qHjOkf9J3K6zgmCxgJ94u2EdvDOV09H+32LtRswEcUsmUWN72pVLOEnTSRaIVVzVQgS0dg==
     dependencies:
       webidl-conversions "^5.0.0"
+  
+  dotenv@*, dotenv@^8.2.0:
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+    integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   
   dotenv@^6.2.0:
     version "6.2.0"
