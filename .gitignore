@@ -3,6 +3,8 @@
 node_modules
 yarn.lock
 build
+.env
 tmp/*
 !tmp/.gitkeep
 temp
+ormconfig.json
