@@ -24,7 +24,7 @@ class UsersRepository implements IUsersRepository {
       where: { email }
     });
 
-    return user
+    return user;
   }
 
   public async findAllProviders({
