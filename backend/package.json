@@ -16,6 +16,7 @@
     "@types/cors": "^2.8.7",
     "@types/dotenv": "^8.2.0",
     "@types/nodemailer": "^6.4.0",
+    "aws-sdk": "^2.766.0",
     "bcryptjs": "^2.4.3",
     "celebrate": "^13.0.3",
     "class-transformer": "^0.3.1",
