@@ -6,9 +6,7 @@
   "author": "Diogo Sales <diogosalesdev@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "gobarber/*"
-    ]
-  }
+  "workspaces": [
+    "./*"
+  ]  
 }

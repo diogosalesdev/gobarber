@@ -12,12 +12,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cors": "^2.8.7",
-    "@types/dotenv": "^8.2.0",
-    "@types/ioredis": "^4.17.4",
-    "@types/nodemailer": "^6.4.0",
-    "@types/redis": "^2.8.27",
     "aws-sdk": "^2.766.0",
     "bcryptjs": "^2.4.3",
     "celebrate": "^13.0.3",
@@ -61,6 +55,12 @@
     "ts-jest": "^26.3.0",
     "ts-node-dev": "^1.0.0-pre.60",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.2",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.7",
+    "@types/dotenv": "^8.2.0",
+    "@types/ioredis": "^4.17.4",
+    "@types/nodemailer": "^6.4.0",
+    "@types/redis": "^2.8.27"
   }
 }
