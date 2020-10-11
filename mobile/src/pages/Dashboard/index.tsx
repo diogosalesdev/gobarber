@@ -11,6 +11,6 @@ const Dashboard: React.FC = () => {
       <Button title="Sair" onPress={signOut} />
     </View>
   );
-}
+};
 
 export default Dashboard;
