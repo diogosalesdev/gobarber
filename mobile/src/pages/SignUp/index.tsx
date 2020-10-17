@@ -6,27 +6,22 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
-  Alert
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
-import api from '../../services/api';
 
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import api from '../../services/api';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import {
-  Container,
-  Title,
-  BackToSignIn,
-  BackToSignInText
-} from './styles';
+import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
 import logoImg from '../../assets/logo.png';
 
@@ -45,44 +40,48 @@ const SignUp: React.FC = () => {
 
   const { signIn } = useAuth();
 
-  const handleSignUp = useCallback(async (data: SignUpFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSignUp = useCallback(
+    async (data: SignUpFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome é obrigatório!'),
-        email: Yup.string().required('E-mail é obrigatório!').email('Digite um e-mail válido!'),
-        password: Yup.string().min(6, 'No mínimo 6 digitos!')
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome é obrigatório!'),
+          email: Yup.string()
+            .required('E-mail é obrigatório!')
+            .email('Digite um e-mail válido!'),
+          password: Yup.string().min(6, 'No mínimo 6 digitos!'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      await api.post('/users', data);
+        await api.post('/users', data);
 
-      Alert.alert(
-        'Cadastro realizado com sucesso!',
-        'Você já pode fazer login na aplicação.'
-      );
+        Alert.alert(
+          'Cadastro realizado com sucesso!',
+          'Você já pode fazer login na aplicação.',
+        );
 
-      navigation.goBack();
+        navigation.goBack();
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
 
-        formRef.current?.setErrors(errors);
+          return;
+        }
 
-        return;
+        Alert.alert(
+          'Erro no cadastro!',
+          'Ocorreu um erro ao fazer cadastro, tente novamente!',
+        );
       }
-
-      Alert.alert(
-        'Erro no cadastro!',
-        'Ocorreu um erro ao fazer cadastro, tente novamente!'
-      );
-    }
-  }, [navigation]);
+    },
+    [navigation],
+  );
 
   return (
     <>
@@ -132,10 +131,18 @@ const SignUp: React.FC = () => {
                 placeholder="Senha"
                 textContentType="newPassword"
                 returnKeyType="send"
-                onSubmitEditing={() => {formRef.current?.submitForm()}}
+                onSubmitEditing={() => {
+                  formRef.current?.submitForm();
+                }}
               />
 
-              <Button onPress={() => {formRef.current?.submitForm()}} >Entrar</Button>
+              <Button
+                onPress={() => {
+                  formRef.current?.submitForm();
+                }}
+              >
+                Entrar
+              </Button>
             </Form>
           </Container>
         </ScrollView>
@@ -146,6 +153,6 @@ const SignUp: React.FC = () => {
       </KeyboardAvoidingView>
     </>
   );
-}
+};
 
 export default SignUp;
